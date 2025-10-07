@@ -5,13 +5,23 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyDsKHXLG4zkYjU5ksVoZlYR-krsMfDsKUk",
-  authDomain: "blogweb-cf859.firebaseapp.com",
-  projectId: "blogweb-cf859",
-  storageBucket: "blogweb-cf859.firebasestorage.app",
-  messagingSenderId: "902320249703",
-  appId: "1:902320249703:web:69495f65e93776252f2dc2"
+  apiKey: "AIzaSyDgdX2PeK0S0ibXqT8Kkzo9aDiMpYUmSr0",
+  authDomain: "reactnew-8797c.firebaseapp.com",
+  projectId: "reactnew-8797c",
+  storageBucket: "reactnew-8797c.firebasestorage.app",
+  messagingSenderId: "686514996559",
+  appId: "1:686514996559:web:f12bdb96c13231cb04f13a",
 };
 
+import { getDatabase } from "firebase/database";
+
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
+const BlogWeb = initializeApp(firebaseConfig);
+import { getAuth } from "firebase/auth";
+
+export const auth = getAuth(BlogWeb)
+export const db = getDatabase(BlogWeb)
+
+// Export the initialized app so other modules can use it (and keep a default export for convenience)
+export default BlogWeb;
+export { BlogWeb };

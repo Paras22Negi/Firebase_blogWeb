@@ -86,7 +86,7 @@ function BlogSignup() {
         {/* Already have account link */}
         <p className="text-center text-gray-600 mt-6 ">
           Already have an account?{" "}
-          <Link to={"/login"} className="text-blue-600 hover:underline ">
+          <Link to={"/BlogLogin"} className="text-blue-600 hover:underline ">
             Log In
           </Link>
         </p>

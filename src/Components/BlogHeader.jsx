@@ -1,19 +1,26 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { loginContext } from "../MainContext";
 
 function BlogHeader() {
+  const { token, setToken } = useContext(loginContext);
+
+  const clear = () => {
+    setToken("");
+  };
+
   return (
     <div className="w-full h-16 bg-blue-500 text-white flex">
       {/* Logo Section */}
       <div className="h-full w-[20%] flex items-center justify-center ">
-        <img src="/logo-blog.jpg" alt="Logo" className="h-16 w-45" />
+        <img src="/logo-blog.jpg" alt="Logo" className="h-15 w-45" />
       </div>
 
       {/* Navbar Section */}
       <nav className="flex items-center justify-end w-[80%] h-full pr-15 mr-10">
         <ul className="flex gap-15 italic font-bold text-lg">
           <li className=" flex items-center border-0 ">
-            <Link to={"/blog"} className=" border-0 hover:text-emerald-400">
+            <Link to={"/"} className=" border-0 hover:text-emerald-400">
               Blog
             </Link>
           </li>
@@ -30,13 +37,24 @@ function BlogHeader() {
               Listing
             </Link>
           </li>
-          <li>
-            <button className="rounded p-2 w-[80px] bg-white text-blue-500 font-bold hover:bg-yellow-600 hover:text-white duration-300">
-              <Link to={"/BlogLogin"} className=" border-0">
-                Login
+          {token ? (
+            <li>
+              <button
+                onClick={clear}
+                className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-1 px-4 border border-gray-400 rounded shadow"
+              >
+                Logout
+              </button>
+            </li>
+          ) : (
+            <li>
+              <Link to="/blogLogin">
+                <button className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-1 px-4 border border-gray-400 rounded shadow">
+                  Login
+                </button>
               </Link>
-            </button>
-          </li>
+            </li>
+          )}
         </ul>
       </nav>
     </div>
