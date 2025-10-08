@@ -5,6 +5,9 @@ import { FaUser } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { auth } from "../firebaseconfig";
+import { ref } from "firebase/database";
+import { db } from "../firebaseconfig";
+import { set } from "firebase/database";
 
 const provider = new GoogleAuthProvider();
 
@@ -46,6 +49,12 @@ function BlogLogin() {
         const user = result.user;
         console.log(user);
         localStorage.setItem("token", token);
+        set(ref(db, 'users/' + user.uid), {
+          username: user.displayName,
+          email: user.email,
+          profile_picture : user.photoURL
+          
+        });
         localStorage.setItem("user", JSON.stringify(user));
         navigate("/");
       }).catch((error) => {

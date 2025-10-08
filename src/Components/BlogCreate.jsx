@@ -15,6 +15,7 @@ function BlogCreate() {
     obj[inputName] = inputValue
     setFormData(obj)
   }
+  
   const saveBlog =(event)=>{
     event.preventDefault();
     const blogId = new Date().getTime();

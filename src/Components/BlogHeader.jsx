@@ -1,14 +1,14 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { loginContext } from "../MainContext";
 
 function BlogHeader() {
-  const { token, setToken } = useContext(loginContext);
-
+  const [token, setToken] = useContext(loginContext);
+  
+  
   const clear = () => {
     setToken("");
   };
-
   return (
     <div className="w-full h-16 bg-blue-500 text-white flex">
       {/* Logo Section */}

@@ -7,7 +7,7 @@ export default function MainRootLayout({ children }) {
   // Safe init from localStorage
   const [token, setToken] = useState(() => {
     try {
-      return localStorage.getItem("USERTOKEN") ?? "";
+      return localStorage.getItem("token") ?? "";
     } catch(err) {
       console.log("Failed to read token", err);
       return "";
@@ -18,7 +18,7 @@ export default function MainRootLayout({ children }) {
 
   useEffect(() => {
     try {
-      localStorage.setItem("USERTOKEN", token ?? "");
+      localStorage.setItem("token", token ?? "");
     } catch(err) {
       console.log("Failed to save token", err);
     }
