@@ -4,11 +4,16 @@ import { loginContext } from "../MainContext";
 
 function BlogHeader() {
   const [token, setToken] = useContext(loginContext);
-  
+  useEffect(() => {
+    console.log("Token in Header:", token);
+  }, [token]);
   
   const clear = () => {
     setToken("");
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
   };
+
   return (
     <div className="w-full h-16 bg-blue-500 text-white flex">
       {/* Logo Section */}

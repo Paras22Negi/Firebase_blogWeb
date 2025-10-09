@@ -26,7 +26,8 @@ function BlogCreate() {
       content: formData.description,
       CreatedAt: new Date().toLocaleString(),
     };
-    set(ref(db, 'blogs/' + blogId), payload)
+    const userId = JSON.parse(localStorage.getItem("user")).uid;
+    set(ref(db, `users/${userId}/blogs/` + blogId), payload)
       .then(() => {
         // optionally clear form after successful save
         setFormData({ heading: "", description: "" });

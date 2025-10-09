@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { FaGoogle } from "react-icons/fa";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { FaUser } from "react-icons/fa";
@@ -8,6 +8,7 @@ import { auth } from "../firebaseconfig";
 import { ref } from "firebase/database";
 import { db } from "../firebaseconfig";
 import { set } from "firebase/database";
+import { loginContext } from "../MainContext";
 
 const provider = new GoogleAuthProvider();
 
@@ -18,6 +19,7 @@ function BlogLogin() {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const [, setToken] = useContext(loginContext);
 
   const handleLogin = () => {
     setLoading(true);
@@ -26,6 +28,7 @@ function BlogLogin() {
         // Signed in 
         const user = userCredential.user;
         console.log(user);
+        setToken(user.accessToken);
         navigate("/");
       })
       .catch((error) => {
@@ -48,7 +51,7 @@ function BlogLogin() {
         // The signed-in user info.
         const user = result.user;
         console.log(user);
-        localStorage.setItem("token", token);
+        setToken(token);
         set(ref(db, 'users/' + user.uid), {
           username: user.displayName,
           email: user.email,
