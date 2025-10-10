@@ -51,18 +51,19 @@ function Blog() {
   const [finalBlog, setFinalBlog] = useState([]);
 
   const getBlogs = ()=>{
-    const userId = JSON.parse(localStorage.getItem("user")).uid;
-    const blogRef = ref (db, `users/${userId}/blogs/`); //const blogRef = ref (db, 'blogs/');
-    onValue(blogRef, (items)=>{
-      const data = items.val()
-      console.log(data)
-      const finalArray=[]
-      for (let key in data){
-        console.log(key)
-        finalArray.push(data[key])
+    const userId = JSON.parse(localStorage.getItem("user"));
+    const blogRef = ref (db, 'blogs/');
+    // const blogRef = ref (db, `users/${userId}/blogs/`);
+    onValue(blogRef, (items) => {
+      const data = items.val();
+      console.log(data);
+      const finalArray = [];
+      for (let key in data) {
+        console.log(key);
+        finalArray.push(data[key]);
       }
-      setFinalBlog(finalArray)
-    })
+      setFinalBlog(finalArray);
+    });
   }
 
   useEffect(()=>{
@@ -80,7 +81,7 @@ function Blog() {
         pagination={{ clickable: true }}
         modules={[Pagination, Autoplay, Navigation]}
         autoplay={{
-          delay: 5000,
+          delay: 2000,
           pauseOnMouseEnter: true,
         }}
         className="my-8"
